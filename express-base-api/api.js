@@ -3,6 +3,23 @@ const { ErrorHandler } = require('./../error/main');
 const { quicklyCheckMySession } = require('./../admin/common');
 const { getCurrentEpochTime } = require('./../common');
 
+
+/**
+ * @typedef {{isBasicAuth:boolean;resolver:(data)=>void,authGaurd:()=>Promise<any>}} ConfigSettings
+ */
+
+/**
+ * @typedef {{get?:ConfigSettings;post?:ConfigSettings;put?:ConfigSettings;delete?:ConfigSettings}} BaseAPIConfig
+ */
+
+/**
+ * Class for Base API
+ * @param {Object} app Express app
+ * @param {string} prefix URL Prefix for your api
+ * @param {string} collName Default mongo db collection name
+ * @param {Object} handlerClass Main class entity
+ * @param {BaseAPIConfig} config API Config
+ */
 var BaseAPI = function BaseAPI(app, prefix, collName, handlerClass, config = {}) {
   this.app = app;
   this.urlPrefix = prefix || "";

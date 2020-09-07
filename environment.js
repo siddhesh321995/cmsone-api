@@ -1,6 +1,6 @@
 const envs = {
   production: {
-    MONGODB_CONNECTION: 'mongodb+srv://avara:avara@avara-7tde3.mongodb.net/avara?retryWrites=true&w=majority',
+    MONGODB_CONNECTION: 'mongodb+srv://XXXX:XXXX@XXXX-7tde3.mongodb.net/XXXX',
     HAS_CERT: false,
     DATABASE_NAME: 'cmsone',
     EMAILID: 'XXX@gmail.com',
@@ -14,7 +14,7 @@ const envs = {
     EMAIL_PASSWORD: 'QWERTY'
   },
   stage: {
-    MONGODB_CONNECTION: 'mongodb+srv://avara:avara@avara-7tde3.mongodb.net/stage?retryWrites=true&w=majority',
+    MONGODB_CONNECTION: 'mongodb+srv://XXXX:XXXX@XXXX-7tde3.mongodb.net/XXXX',
     HAS_CERT: false,
     DATABASE_NAME: 'cmsone',
     EMAILID: 'XXX@gmail.com',

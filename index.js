@@ -28,11 +28,15 @@ const getVersion = function () {
 /**
  * Sets up your express app
  * @param {Object} app Express API App
+ * @param {Object} mainConfig Env config like mongo connection string, email config etc
+ * @param {Object} foldersData Object containing folder API and Classes
  */
-const setup = (app, mainConfig) => {
+const setup = (app, mainConfig, foldersData) => {
   const config = environments.envs[process.env.NODE_ENV];
   if (!mainConfig) {
     mainConfig = config;
+  } else {
+    mainConfig = mainConfig[process.env.NODE_ENV];
   }
 
   // Configure database
@@ -83,7 +87,7 @@ const setup = (app, mainConfig) => {
   new AnalyticsAPI(app, '/analytics');
   new NewsLetterAPI(app, '/newsletter');
 
-  const siteInfoAPI = new SiteInfoAPI(app, '/siteinfo');
+  const siteInfoAPI = new SiteInfoAPI(app, '/siteinfo', void 0, foldersData);
   SiteInfoAPI._instance = siteInfoAPI;
 };
 
@@ -99,5 +103,9 @@ module.exports = {
   AnalyticsAPI,
   NewsLetterAPI,
   SiteInfoAPI,
-  MongoManager: require('./db-manager/manager')
+  CMS,
+  MongoManager: require('./db-manager/manager'),
+  Notification: require('./notification/main'),
+  Log: require('./error/main'),
+  Common: require('./common')
 };

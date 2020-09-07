@@ -13,6 +13,7 @@ const { UUID_NIL, CacheMgr } = require('./../common');
 
 class SiteInfoAPI extends BaseAPI {
   constructor(app, prefix, collName, foldersData) {
+    if (foldersData == void 0) { foldersData = {}; }
     super(app, prefix, collName || SiteInfoAPI.COLLECTION_NAME, CMS, {
       get: {},
       put: {},
