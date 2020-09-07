@@ -12,6 +12,19 @@ const { MongoDBManager } = require('./db-manager/manager');
 // setup environment
 environments.setup();
 
+const getVersion = function () {
+  var major = 2;
+  var minor = 0;
+  var patch = 0;
+
+  return {
+    version: 'v' + major + '.' + minor + '.' + patch,
+    major,
+    minor,
+    patch
+  };
+};
+
 /**
  * @typedef {{sessionCollectionName:string;}} SetupOptions
  */
