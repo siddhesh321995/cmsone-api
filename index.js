@@ -12,45 +12,49 @@ const { MongoDBManager } = require('./db-manager/manager');
 // setup environment
 environments.setup();
 
-const getVersion = function () {
-  var major = 2;
-  var minor = 0;
-  var patch = 0;
+/**
+ * @typedef {{sessionCollectionName:string;}} SetupOptions
+ */
 
-  return {
-    version: 'v' + major + '.' + minor + '.' + patch,
-    major,
-    minor,
-    patch
-  };
-};
+/**
+ * @typedef {{MONGODB_CONNECTION:string;HAS_CERT:boolean;DATABASE_NAME:string;EMAILID:string;EMAIL_PASSWORD:string}} EnvironmentConfigs
+ */
+
+/**
+ * @typedef {{[env:string]:EnvironmentConfigs}} Configs
+ */
 
 /**
  * Sets up your express app
  * @param {Object} app Express API App
- * @param {Object} mainConfig Env config like mongo connection string, email config etc
+ * @param {Configs} mainConfig Env config like mongo connection string, email config etc
  * @param {Object} foldersData Object containing folder API and Classes
  */
 const setup = (app, mainConfig, foldersData) => {
   const config = environments.envs[process.env.NODE_ENV];
+  /**
+   * @type {EnvironmentConfigs}
+   */
+  let usedConfig;
+
   if (!mainConfig) {
-    mainConfig = config;
+    usedConfig = config;
   } else {
-    mainConfig = mainConfig[process.env.NODE_ENV];
+    usedConfig = mainConfig[process.env.NODE_ENV];
   }
 
   // Configure database
   MongoDBManager.configure({
-    connectionString: mainConfig.MONGODB_CONNECTION,
-    hasCert: mainConfig.HAS_CERT,
+    connectionString: usedConfig.MONGODB_CONNECTION,
+    hasCert: usedConfig.HAS_CERT,
     certPath: __dirname + "/ssl.cert",
-    dbName: mainConfig.DATABASE_NAME
+    dbName: usedConfig.DATABASE_NAME
   });
 
   // Configure email
   configuerEmail({
-    user: mainConfig.EMAILID,
-    pass: mainConfig.EMAIL_PASSWORD
+    user: usedConfig.EMAILID,
+    pass: usedConfig.EMAIL_PASSWORD
   });
 
   app.get('/', function (request, response) {
