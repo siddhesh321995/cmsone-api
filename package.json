@@ -1,10 +1,10 @@
 {
   "name": "cmsone-api",
-  "version": "1.1.6",
-  "description": "API for CMS One",
+  "version": "1.1.7",
+  "description": "Simple light weight node-express based CMS Web API",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js NODE_ENV=local"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -17,11 +17,11 @@
     "CMSOne", "ExpressJS", "API", "CMS"
   ],
   "author": "Siddhesh Kulkarni",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/siddhesh321995/cmsone-api/issues"
   },
-  "homepage": "https://github.com/siddhesh321995/cmsone-api#readme",
+  "homepage": "http://www.cmsone.site",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "mongodb": "^3.6.1",
