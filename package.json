@@ -1,0 +1,31 @@
+{
+  "name": "cmsone-api",
+  "version": "1.0.0",
+  "description": "API for CMS One",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js NODE_ENV=local"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siddhesh321995/cmsone-api.git"
+  },
+  "engines": {
+    "node": "12.16.1"
+  },
+  "keywords": [
+    "CMSOne"
+  ],
+  "author": "Siddhesh Kulkarni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/siddhesh321995/cmsone-api/issues"
+  },
+  "homepage": "https://github.com/siddhesh321995/cmsone-api#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "mongodb": "^3.6.1",
+    "nodemailer": "^6.4.11",
+    "uuid": "^8.3.0"
+  }
+}
