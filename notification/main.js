@@ -33,8 +33,8 @@ const pushNotification = (data) => {
           `
         }, (resp) => {
         }, (err) => {
-          ErrorHandler.logError(err);
           console.log('error sending email ', err.toString());
+          ErrorHandler.logError(err);
         });
         break;
       case NotificationType.NewLetterSubscriber:
@@ -51,8 +51,8 @@ const pushNotification = (data) => {
             `
         }, (resp) => {
         }, (err) => {
-          ErrorHandler.logError(err);
           console.log('error sending email ', err.toString());
+          ErrorHandler.logError(err);
         });
         break;
       case NotificationType.UserRegistered:
@@ -70,8 +70,8 @@ const pushNotification = (data) => {
               `
         }, (resp) => {
         }, (err) => {
-          ErrorHandler.logError(err);
           console.log('error sending email ', err.toString());
+          ErrorHandler.logError(err);
         });
 
         Emailer.sendMail({
@@ -88,8 +88,8 @@ const pushNotification = (data) => {
               `
         }, (resp) => {
         }, (err) => {
-          ErrorHandler.logError(err);
           console.log('error sending email ', err.toString());
+          ErrorHandler.logError(err);
         });
         break;
       case NotificationType.HighSeverityErrorOccured:
@@ -111,8 +111,8 @@ const pushNotification = (data) => {
               `
         }, (resp) => {
         }, (err) => {
-          ErrorHandler.logError(err);
           console.log('error sending email ', err.toString());
+          ErrorHandler.logError(err);
         });
         break;
       case NotificationType.ResourceReviewAdded:
@@ -145,8 +145,8 @@ const pushNotification = (data) => {
                 `
         }, (resp) => {
         }, (err) => {
-          ErrorHandler.logError(err);
           console.log('error sending email ', err.toString());
+          ErrorHandler.logError(err);
         });
         break;
     }

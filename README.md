@@ -1,20 +1,21 @@
 # CMS One API
 > Simple light weight node-express based API wrapper
 
-## Usage:
+## Installation:
+- Add auth.json with any authkey at data/ folder. (this key will be used while configuring CMS from GUI)
+- Add emails.json with noreply email and noreplyName title at root directory. (Open sample emails.json for ref) 
+
 
 ```
 npm install cmsone-api --save
 ```
 
-```
-const { Main } = require('cmsone-api');
-```
 
-Setup your API environment
+Setup your API
 ```
 const express = require('express');
 const app = express();
+const { Main } = require('cmsone-api');
 
 Main.setup(app, {
     production: {
