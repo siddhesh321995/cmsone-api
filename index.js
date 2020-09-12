@@ -9,6 +9,15 @@ const NewsLetterAPI = require('./newsletter/api');
 const SiteInfoAPI = require('./cms/siteinfo');
 const { MongoDBManager } = require('./db-manager/manager');
 
+const ContentFolderAPI = require('./content-lib/content-folder-api');
+const { ContentFolder } = require('./content-lib/content-folder');
+const ContentItemAPI = require('./content-lib/api');
+
+const MenuFolderAPI = require('./menunpages/menus-api');
+const { MenuFolder } = require('./menunpages/menus-main');
+const PagesAPI = require('./menunpages/pages-api');
+const PageContentAPI = require('./menunpages/pagecontent-api');
+
 // setup environment
 environments.setup();
 
@@ -43,7 +52,12 @@ const getVersion = function () {
  * @param {Configs} mainConfig Env config like mongo connection string, email config etc
  * @param {Object} foldersData Object containing folder API and Classes
  */
-const setup = (app, mainConfig, foldersData) => {
+const setup = (app, mainConfig, foldersData = {}) => {
+  if (foldersData.ContentFolderAPI == void 0) { foldersData.ContentFolderAPI = ContentFolderAPI; }
+  if (foldersData.ContentFolder == void 0) { foldersData.ContentFolder = ContentFolder; }
+  if (foldersData.MenuFolderAPI == void 0) { foldersData.MenuFolderAPI = MenuFolderAPI; }
+  if (foldersData.MenuFolder == void 0) { foldersData.MenuFolder = MenuFolder; }
+
   const config = environments.envs[process.env.NODE_ENV];
   /**
    * @type {EnvironmentConfigs}
@@ -104,6 +118,20 @@ const setup = (app, mainConfig, foldersData) => {
   new AnalyticsAPI(app, '/analytics');
   new NewsLetterAPI(app, '/newsletter');
 
+  const contentItemAPI = new ContentItemAPI(app, '/contentitem');
+  ContentItemAPI._instance = contentItemAPI;
+
+  const contentFolderAPI = new ContentFolderAPI(app, '/contentfolder');
+  ContentFolderAPI._instance = contentFolderAPI;
+
+  new PagesAPI(app, PagesAPI.API_URL);
+
+  const pageContentAPI = new PageContentAPI(app, PageContentAPI.API_URL);
+  PageContentAPI._instance = pageContentAPI;
+
+  const menuFolderAPI = new MenuFolderAPI(app, MenuFolderAPI.API_URL);
+  MenuFolderAPI._instance = menuFolderAPI;
+
   const siteInfoAPI = new SiteInfoAPI(app, '/siteinfo', void 0, foldersData);
   SiteInfoAPI._instance = siteInfoAPI;
 };
@@ -124,5 +152,11 @@ module.exports = {
   MongoManager: require('./db-manager/manager'),
   Notification: require('./notification/main'),
   Log: require('./error/main'),
-  Common: require('./common')
+  Common: require('./common'),
+  ContentItemAPI,
+  ContentFolderAPI,
+  PagesAPI,
+  PageContentAPI,
+  MenuFolderAPI,
+  SiteInfoAPI
 };
