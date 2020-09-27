@@ -124,7 +124,8 @@ const setup = (app, mainConfig, foldersData = {}) => {
   const contentFolderAPI = new ContentFolderAPI(app, '/contentfolder');
   ContentFolderAPI._instance = contentFolderAPI;
 
-  new PagesAPI(app, PagesAPI.API_URL);
+  const pagesAPI = new PagesAPI(app, PagesAPI.API_URL);
+  PagesAPI._instance = pagesAPI;
 
   const pageContentAPI = new PageContentAPI(app, PageContentAPI.API_URL);
   PageContentAPI._instance = pageContentAPI;

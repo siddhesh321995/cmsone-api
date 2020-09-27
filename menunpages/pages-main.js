@@ -10,6 +10,7 @@ class Pages {
     this.desc = data.desc;
 
     this.urlfrdnlyname = data.urlfrdnlyname;
+    this.completeurl = data.completeurl;
 
     this.folderid = data.folderid;
 
@@ -32,6 +33,7 @@ class Pages {
     json.desc = this.desc;
 
     json.urlfrdnlyname = this.urlfrdnlyname;
+    json.completeurl = this.completeurl;
 
     json.folderid = this.folderid;
 
@@ -82,6 +84,9 @@ Pages.SCHEMA = {
     type: 'string'
   }, {
     name: 'urlfrdnlyname',
+    type: 'string'
+  }, {
+    name: 'completeurl',
     type: 'string'
   }, {
     name: 'folderid',

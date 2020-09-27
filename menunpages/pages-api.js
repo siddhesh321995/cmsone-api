@@ -45,6 +45,31 @@ class PagesAPI extends BaseAPI {
 
     return respOut;
   }
+
+  async getPageBasicDetailsById(pageid) {
+    const getOut = await MongoDBManager.getInstance().getDocumentsByProm(this.collName, {
+      id: pageid,
+      isActive: true
+    });
+
+    return new Pages(getOut[0]).toJSON();
+  }
+
+  async getPageBasicDetailsByURL(completeURL) {
+    if (completeURL[completeURL.length - 1] === '/') {
+      completeURL += 'index';
+    }
+
+    const pageOut = await MongoDBManager.getInstance().getDocumentsByProm(this.collName, {
+      completeurl: completeURL,
+      isActive: true
+    });
+    if (pageOut.length) {
+      return new Pages(pageOut[0]).toJSON();
+    } else {
+      return void 0;
+    }
+  }
 }
 
 PagesAPI.COLLECTION_NAME = 'page';
