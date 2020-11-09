@@ -38,6 +38,16 @@ const checkMySession = async (usersessionid, ip) => {
     return { status: 401, data: { message: 'Network has been changed', errorCode: 3 } };
   }
 
+  const dateObj1 = new Date();
+  const endtime1 = parseInt((dateObj1).getTime() / 1000);
+  if ((sessionObj.starttime + 60 * 60 * 24) > endtime1) {
+    MongoDBManager.getInstance().updateOneDocProm(AdminAPI.USER_SESSION_COLLECTION_NAME, {
+      id: usersessionid
+    }, { $set: { isActive: false, endtime: endtime1 } });
+
+    return { status: 401, data: { message: 'Session has been expired', errorCode: 2 } };
+  }
+
   const userOut = await MongoDBManager.getInstance().getDocumentsByProm(USER_COLLECTION_NAME, {
     id: sessionObj.userid
   });
@@ -65,6 +75,17 @@ const quicklyCheckMySession = async (usersessionid, ip) => {
   if (sessionObj.ip != ip) {
     return { status: 401, data: { message: 'Network has been changed', errorCode: 3 } };
   }
+
+  const dateObj1 = new Date();
+  const endtime1 = parseInt((dateObj1).getTime() / 1000);
+  if ((sessionObj.starttime + 60 * 60 * 24) > endtime1) {
+    MongoDBManager.getInstance().updateOneDocProm(AdminAPI.USER_SESSION_COLLECTION_NAME, {
+      id: usersessionid
+    }, { $set: { isActive: false, endtime: endtime1 } });
+
+    return { status: 401, data: { message: 'Session has been expired', errorCode: 2 } };
+  }
+
   return { status: 200, data: true };
 };
 
