@@ -24,7 +24,7 @@ environments.setup();
 const getVersion = function () {
   var major = 1;
   var minor = 1;
-  var patch = 22;
+  var patch = 25;
 
   return {
     version: 'v' + major + '.' + minor + '.' + patch,

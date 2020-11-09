@@ -31,7 +31,7 @@ const checkMySession = async (usersessionid, ip) => {
   if (sessionObj.ip != ip) {
     const dateObj = new Date();
     const endtime = parseInt((dateObj).getTime() / 1000);
-    MongoDBManager.getInstance().updateOneDocProm(AdminAPI.USER_SESSION_COLLECTION_NAME, {
+    MongoDBManager.getInstance().updateOneDocProm(USER_SESSION_COLLECTION_NAME, {
       id: usersessionid
     }, { $set: { isActive: false, endtime: endtime } });
 
@@ -40,8 +40,8 @@ const checkMySession = async (usersessionid, ip) => {
 
   const dateObj1 = new Date();
   const endtime1 = parseInt((dateObj1).getTime() / 1000);
-  if ((sessionObj.starttime + 60 * 60 * 24) > endtime1) {
-    MongoDBManager.getInstance().updateOneDocProm(AdminAPI.USER_SESSION_COLLECTION_NAME, {
+  if ((sessionObj.starttime + (60 * 60 * 24)) < endtime1) {
+    MongoDBManager.getInstance().updateOneDocProm(USER_SESSION_COLLECTION_NAME, {
       id: usersessionid
     }, { $set: { isActive: false, endtime: endtime1 } });
 
@@ -78,8 +78,8 @@ const quicklyCheckMySession = async (usersessionid, ip) => {
 
   const dateObj1 = new Date();
   const endtime1 = parseInt((dateObj1).getTime() / 1000);
-  if ((sessionObj.starttime + 60 * 60 * 24) > endtime1) {
-    MongoDBManager.getInstance().updateOneDocProm(AdminAPI.USER_SESSION_COLLECTION_NAME, {
+  if ((sessionObj.starttime + (60 * 60 * 24)) < endtime1) {
+    MongoDBManager.getInstance().updateOneDocProm(USER_SESSION_COLLECTION_NAME, {
       id: usersessionid
     }, { $set: { isActive: false, endtime: endtime1 } });
 
