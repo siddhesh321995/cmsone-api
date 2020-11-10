@@ -1,5 +1,7 @@
-# CMS One API
+# CMS One API 
 > Simple light weight node-express based API wrapper
+
+[![Build Status](https://travis-ci.com/siddhesh321995/cmsone-api.svg?branch=master)](https://travis-ci.com/siddhesh321995/cmsone-api)
 
 ## Installation:
 - Add auth.json with any authkey at data/ folder. (this key will be used while configuring CMS from GUI)
