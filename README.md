@@ -3,6 +3,7 @@
 
 [![Build Status](https://travis-ci.com/siddhesh321995/cmsone-api.svg?branch=master)](https://travis-ci.com/siddhesh321995/cmsone-api)
 ![Node.js CI](https://github.com/siddhesh321995/cmsone-api/workflows/Node.js%20CI/badge.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/siddhesh321995/cmsone-api/badge.svg?branch=master)](https://coveralls.io/github/siddhesh321995/cmsone-api?branch=master)
 
 ## Installation:
 - Add auth.json with any authkey at data/ folder. (this key will be used while configuring CMS from GUI)
