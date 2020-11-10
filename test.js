@@ -55,6 +55,7 @@ try {
 
 
 // test PageContentAPI -> getPageByURL
+/*
 try {
   const getPageByURL = CMSOne.PageContentAPI.getInstance().getPageByURL('/asdasd');
   getPageByURL.then((data) => {
@@ -71,3 +72,4 @@ try {
   console.log('Failed test: PageContentAPI -> getPageByURL', { details: err.stack });
   console.log('03=====END=====');
 }
+*/
