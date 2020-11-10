@@ -1,4 +1,4 @@
-const { MongoDBManager } = require('./../db-manager/manager');
+const { MongoDBManager } = require('mongo-driverify');
 const { ErrorHandler } = require('./../error/main');
 const { quicklyCheckMySession } = require('./../admin/common');
 const { getCurrentEpochTime } = require('./../common');

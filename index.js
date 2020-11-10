@@ -7,7 +7,6 @@ const AdminAPI = require('./admin/api');
 const AnalyticsAPI = require('./analytics/api');
 const NewsLetterAPI = require('./newsletter/api');
 const SiteInfoAPI = require('./cms/siteinfo');
-const { MongoDBManager } = require('./db-manager/manager');
 
 const ContentFolderAPI = require('./content-lib/content-folder-api');
 const { ContentFolder } = require('./content-lib/content-folder');
@@ -17,6 +16,8 @@ const MenuFolderAPI = require('./menunpages/menus-api');
 const { MenuFolder } = require('./menunpages/menus-main');
 const PagesAPI = require('./menunpages/pages-api');
 const PageContentAPI = require('./menunpages/pagecontent-api');
+const MongoDriver = require('mongo-driverify');
+
 
 // setup environment
 environments.setup();
@@ -24,7 +25,7 @@ environments.setup();
 const getVersion = function () {
   var major = 1;
   var minor = 1;
-  var patch = 25;
+  var patch = 27;
 
   return {
     version: 'v' + major + '.' + minor + '.' + patch,
@@ -71,11 +72,11 @@ const setup = (app, mainConfig, foldersData = {}) => {
   }
 
   // Configure database
-  MongoDBManager.configure({
-    connectionString: usedConfig.MONGODB_CONNECTION,
-    hasCert: usedConfig.HAS_CERT,
-    certPath: __dirname + "/ssl.cert",
-    dbName: usedConfig.DATABASE_NAME
+  MongoDriver.MongoDBManager.configure({
+    connectionString: 'mongodb+srv://XXXX:XXXX@XXXX-XXXX.mongodb.net/XXXX',
+    hasCert: false,
+    certPath: '',
+    dbName: 'XXXX'
   });
 
   // Configure email
@@ -150,7 +151,7 @@ module.exports = {
   NewsLetterAPI,
   SiteInfoAPI,
   CMS,
-  MongoManager: require('./db-manager/manager'),
+  MongoManager: MongoDriver,
   Notification: require('./notification/main'),
   Log: require('./error/main'),
   Common: require('./common'),

@@ -1,4 +1,4 @@
-const { MongoDBManager } = require('./../db-manager/manager');
+const { MongoDBManager } = require('mongo-driverify');
 const { NotificationType, pushNotification } = require('./../notification/main');
 
 class LogType {

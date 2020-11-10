@@ -1,4 +1,4 @@
-const { MongoDBManager } = require('./../db-manager/manager');
+const { MongoDBManager } = require('mongo-driverify');
 const { UserSession } = require('./usersession');
 const { User } = require('./user');
 

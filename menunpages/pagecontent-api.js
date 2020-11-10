@@ -1,4 +1,4 @@
-const { MongoDBManager } = require('./../db-manager/manager');
+const { MongoDBManager } = require('mongo-driverify');
 const BaseAPI = require('./../express-base-api/api');
 const { PageContent } = require('./pagecontent-main');
 const ContentItemAPI = require('./../content-lib/api');

@@ -1,5 +1,5 @@
 const { Tracker, EventTypes, ActivityScore } = require('./main');
-const { MongoDBManager } = require('../db-manager/manager');
+const { MongoDBManager } = require('mongo-driverify');
 const BaseAPI = require('../express-base-api/api');
 const Notification = require('../notification/main');
 const { ErrorHandler } = require('./../error/main');
