@@ -2,6 +2,7 @@
 > Simple light weight node-express based API wrapper
 
 [![Build Status](https://travis-ci.com/siddhesh321995/cmsone-api.svg?branch=master)](https://travis-ci.com/siddhesh321995/cmsone-api)
+![Node.js CI](https://github.com/siddhesh321995/cmsone-api/workflows/Node.js%20CI/badge.svg?branch=master)
 
 ## Installation:
 - Add auth.json with any authkey at data/ folder. (this key will be used while configuring CMS from GUI)
