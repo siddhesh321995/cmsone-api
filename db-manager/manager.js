@@ -271,6 +271,83 @@ MongoDBManager.prototype.getDistinctDocumentsProm = async function getDocumentsB
 };
 
 /**
+ * Get aggregation result in promise.
+ * @param {string} collectionName name of collection
+ * @param {object[]} aggquery Aggregate query
+ * @param {Db} dbObj Database connection object
+ * @returns {Promise<any[]>} Return all documents in array form
+ */
+MongoDBManager.prototype.getAggregate = async function getAggregate(collectionName, aggquery, dbObj) {
+  let closeClient = false;
+  let client;
+  if (dbObj == void 0) {
+    client = await makeConnection();
+    dbObj = client.db(MongoDBManager.DATABASE_NAME);
+    closeClient = true;
+  }
+  return new Promise((res, rej) => {
+    try {
+      dbObj.collection(collectionName).aggregate(aggquery).toArray((err, result) => {
+        closeClient && client.close();
+        if (err) {
+          rej(err);
+          return;
+        }
+        res(result);
+      });
+    } catch (err) {
+      rej(err);
+    }
+  });
+};
+
+/**
+ * Get max of given field from collection.
+ * @param {string} collectionName name of collection
+ * @param {object[]} aggquery Aggregate query
+ * @param {Db} dbObj Database connection object
+ * @returns {Promise<number>} Return maximum number 1 if no documents are matched/available
+ */
+MongoDBManager.prototype.getMax = async function getMax(collectionName, fieldName, idField, dbObj) {
+  let closeClient = false;
+  let client;
+  if (dbObj == void 0) {
+    client = await makeConnection();
+    dbObj = client.db(MongoDBManager.DATABASE_NAME);
+    closeClient = true;
+  }
+  return new Promise((res, rej) => {
+    try {
+      dbObj.collection(collectionName).aggregate([{
+        $group:
+        {
+          _id: '$' + idField,
+          maxField: { $max: '$' + fieldName }
+        }
+      }]).toArray((err, result) => {
+        closeClient && client.close();
+        if (err) {
+          rej(err);
+          return;
+        }
+
+        let maxId = 0;
+        if (result.length) {
+          for (const res of result) {
+            if (res.maxField > maxId) {
+              maxId = res.maxField;
+            }
+          }
+        }
+        res(maxId);
+      });
+    } catch (err) {
+      rej(err);
+    }
+  });
+};
+
+/**
  * Updates one document from collection.
  * @param {string} collectionName name of collection
  * @param {*} query Object containing query checks
