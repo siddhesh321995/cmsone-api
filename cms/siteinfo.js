@@ -9,7 +9,7 @@ let MenuFolderAPI;
 let MenuFolder;
 
 const uuidv4 = require('uuid');
-const { UUID_NIL, CacheMgr } = require('./../common');
+const { UUID_NIL, CacheMgr } = require('node-utilify');
 
 class SiteInfoAPI extends BaseAPI {
   constructor(app, prefix, collName, foldersData) {

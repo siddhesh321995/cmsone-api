@@ -1,7 +1,7 @@
 const { MongoDBManager } = require('mongo-driverify');
 const BaseAPI = require('../express-base-api/api');
 const { CMS } = require('./../cms/main');
-const { UUID_NIL } = require('./../common');
+const { UUID_NIL } = require('node-utilify');
 const { ContentFolder } = require('./content-folder');
 
 class ContentFolderAPI extends BaseAPI {

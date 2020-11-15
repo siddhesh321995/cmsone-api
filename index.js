@@ -25,7 +25,7 @@ environments.setup();
 const getVersion = function () {
   var major = 1;
   var minor = 1;
-  var patch = 27;
+  var patch = 28;
 
   return {
     version: 'v' + major + '.' + minor + '.' + patch,
@@ -73,10 +73,10 @@ const setup = (app, mainConfig, foldersData = {}) => {
 
   // Configure database
   MongoDriver.MongoDBManager.configure({
-    connectionString: 'mongodb+srv://XXXX:XXXX@XXXX-XXXX.mongodb.net/XXXX',
-    hasCert: false,
-    certPath: '',
-    dbName: 'XXXX'
+    connectionString: usedConfig.MONGODB_CONNECTION,
+    hasCert: usedConfig.HAS_CERT,
+    certPath: __dirname + "/ssl.cert",
+    dbName: usedConfig.DATABASE_NAME
   });
 
   // Configure email
@@ -154,7 +154,7 @@ module.exports = {
   MongoManager: MongoDriver,
   Notification: require('./notification/main'),
   Log: require('./error/main'),
-  Common: require('./common'),
+  Common: require('node-utilify'),
   ContentItemAPI,
   ContentFolderAPI,
   PagesAPI,

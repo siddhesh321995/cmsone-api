@@ -1,5 +1,5 @@
 const uuidv4 = require('uuid');
-const { EnumGenerator } = require('./../common');
+const { EnumGenerator } = require('node-utilify');
 
 const ContentItemTypes = EnumGenerator({
   PLAIN_TEXT: 1,
