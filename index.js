@@ -136,6 +136,11 @@ const setup = (app, mainConfig, foldersData = {}) => {
 
   const siteInfoAPI = new SiteInfoAPI(app, '/siteinfo', void 0, foldersData);
   SiteInfoAPI._instance = siteInfoAPI;
+
+  SiteInfoAPI.getInstance().autoConfigNew().then(() => {
+    MenuFolderAPI.getInstance().writeAllHtmlPages();
+  });
+
 };
 
 module.exports = {

@@ -1,8 +1,10 @@
-const { MongoDBManager } = require('mongo-driverify');
+const { MongoDBManager, MGConnection } = require('mongo-driverify');
 const BaseAPI = require('../express-base-api/api');
 const { CMS } = require('./../cms/main');
 const { UUID_NIL } = require('node-utilify');
 const { MenuFolder } = require('./menus-main');
+const PagesAPI = require('./pages-api');
+const { Pages } = require('./pages-main');
 
 class MenuFolderAPI extends BaseAPI {
   constructor(app, prefix, collName) {
@@ -67,10 +69,10 @@ class MenuFolderAPI extends BaseAPI {
     }));
   }
 
-  async getCurrentSiteFolderTree(siteid) {
+  async getCurrentSiteFolderTree(siteid, db) {
     const out = await MongoDBManager.getInstance().getDocumentsByProm(this.collName, {
       isActive: true
-    });
+    }, db);
 
     const getFolderById = (id) => {
       for (const folder of out) {
@@ -96,6 +98,44 @@ class MenuFolderAPI extends BaseAPI {
     root.nodes = getFolderByParentId(root.id);
 
     return root;
+  }
+
+  async getAllActivePages(db) {
+    await CMS.autoConfigure();
+    console.log('siteid', CMS.getInstance().id);
+    const tree = await this.getCurrentSiteFolderTree(CMS.getInstance().id, db);
+    return tree;
+  }
+
+  async getPagesByFolderId(folderid, db) {
+    return PagesAPI.getInstance().getItemsByFolderId(folderid, db);
+  }
+
+  async writeAllHtmlPages() {
+    const conn = new MGConnection();
+    await conn.openConnection();
+    const db = conn.client[MongoDBManager.DATABASE_NAME];
+    const tree = await this.getAllActivePages(db);
+
+    const each = (node, callback) => {
+      if (node) {
+        callback(node);
+        for (const nNode of node.nodes) {
+          each(nNode, callback);
+        }
+      }
+    };
+
+    each(tree, async (node) => {
+      const pages = await this.getPagesByFolderId(node.id, db);
+      node.pages = pages;
+    });
+
+    conn.closeConnection();
+
+    console.log('tree', tree);
+
+    return tree;
   }
 }
 

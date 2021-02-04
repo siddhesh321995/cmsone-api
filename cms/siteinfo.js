@@ -177,6 +177,22 @@ class SiteInfoAPI extends BaseAPI {
 
     CMS._instance.set(new CMS(getOut.data[0]));
     CMS.isConfigured = true;
+    CMS.writeJSON(CMS.SITE_JSON_PATH, CMS._instance.toJSON());
+    return { status: 200, data: CMS._instance.toJSON() };
+  }
+
+  async autoConfigNew() {
+    const getOut = await this.get(true);
+    if (getOut.status != 200) {
+      return getOut;
+    }
+    if (!getOut.data.length) {
+      return { status: 200, data: {} };
+    }
+
+    CMS._instance.set(new CMS(getOut.data[0]));
+    CMS.isConfigured = true;
+    CMS.writeJSON(CMS.SITE_JSON_PATH, CMS._instance.toJSON());
     return { status: 200, data: CMS._instance.toJSON() };
   }
 }

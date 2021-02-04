@@ -192,6 +192,8 @@ CMS.writeJSON = (path, json) => {
 
 CMS.readConfigJSONFIle = () => CMS.readJSON(SITE_JSON_PATH);
 
+CMS.SITE_JSON_PATH = SITE_JSON_PATH;
+
 /**
  * Automatically configures site incase of memory failure.
  */

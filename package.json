@@ -1,6 +1,6 @@
 {
   "name": "cmsone-api",
-  "version": "1.1.28",
+  "version": "1.1.29",
   "description": "Simple light weight node-express based CMS Web API",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "mongodb": "^3.6.1",
     "node-utilify": "^1.0.1",
     "nodemailer": "^6.4.11",
+    "promise-cache-sync": "^0.1.1",
     "uuid": "^8.3.0"
   },
   "devDependencies": {

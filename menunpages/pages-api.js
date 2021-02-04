@@ -32,11 +32,11 @@ class PagesAPI extends BaseAPI {
     }));
   }
 
-  async getItemsByFolderId(folderid) {
+  async getItemsByFolderId(folderid, db) {
     const getOut = await MongoDBManager.getInstance().getDocumentsByProm(this.collName, {
       folderid,
       isActive: true
-    });
+    }, db);
 
     const respOut = [];
     for (const item of getOut) {
